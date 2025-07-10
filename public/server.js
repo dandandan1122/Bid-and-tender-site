@@ -1,19 +1,14 @@
-import express from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import indexRoutes from './routes/index.js';
-
+// server.js
+const express = require('express');
 const app = express();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const path = require('path');
+const indexRouter = require('./routes/routes/index'); // adjust path if needed
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({ extended: true }));
-app.use('/', indexRoutes);
+app.set('views', path.join(__dirname, 'views/routes')); 
+app.use(express.static(path.join(__dirname, 'public/public'))); 
+
+app.use('/', indexRouter);
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
