@@ -1,20 +1,9 @@
-import express from 'express';
-import db from '../database/db.js';
-
+// routes/routes/index.js
+const express = require('express');
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-  const tenders = await db.all('SELECT * FROM tenders');
-  res.render('index', { tenders });
+router.get('/', (req, res) => {
+  res.render('index'); // matches index.ejs
 });
 
-router.post('/add-tender', async (req, res) => {
-  const { title, description, deadline } = req.body;
-  await db.run(
-    'INSERT INTO tenders (title, description, deadline) VALUES (?, ?, ?)',
-    [title, description, deadline]
-  );
-  res.redirect('/');
-});
-
-export default router;
+module.exports = router;
