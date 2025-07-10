@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bidding Platform</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <h1>Active Tenders</h1>
+
+  <ul>
+    <% if (tenders.length === 0) { %>
+      <li>No tenders available.</li>
+    <% } else { %>
+      <% tenders.forEach(tender => { %>
+        <li>
+          <strong><%= tender.title %></strong><br />
+          <%= tender.description %><br />
+          Deadline: <%= tender.deadline %>
+        </li>
+      <% }) %>
+    <% } %>
+  </ul>
+
+  <h2>Post a New Tender</h2>
+  <form action="/add-tender" method="POST">
+    <input name="title" placeholder="Title" required />
+    <textarea name="description" placeholder="Description"></textarea>
+    <input type="date" name="deadline" required />
+    <button type="submit">Add Tender</button>
+  </form>
+</body>
+</html>
